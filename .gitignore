@@ -58,3 +58,4 @@ logs/
 *.env
 secrets.properties
 setenv-local.bat
+web.xml.local

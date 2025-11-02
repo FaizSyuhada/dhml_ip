@@ -13,25 +13,32 @@ The application reads database credentials from environment variables (recommend
 ### Required Environment Variables:
 
 ```bash
-DB_URL=jdbc:postgresql://aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres
-DB_USERNAME=postgres.dzcwtuudnssrvugjgauf
-DB_PASSWORD=your_password_here
+DB_URL=jdbc:postgresql://YOUR_SUPABASE_HOST:5432/postgres
+DB_USERNAME=postgres.YOUR_PROJECT_ID
+DB_PASSWORD=your_secure_password_here
 ```
+
+**Get your values from Supabase:**
+1. Go to Project Settings → Database
+2. Copy Connection String (Session pooler mode)
+3. Extract host, username, and use your database password
 
 ### Local Development:
 
-**Option 1: Use web.xml fallback values** (already configured)
-- Just run Tomcat normally
-- Values in `web.xml` will be used
+**Required:** You MUST set environment variables (credentials not in repo for security)
 
-**Option 2: Use environment variables** (recommended)
-- **Windows:** Run `setenv-local.bat` before starting Tomcat
-- **Linux/Mac:** Export variables in terminal:
-  ```bash
-  export DB_URL="jdbc:postgresql://..."
-  export DB_USERNAME="postgres.dzcwtuudnssrvugjgauf"
-  export DB_PASSWORD="ip_dhml@2026"
-  ```
+**Windows:** Run `setenv-local.bat` before starting Tomcat
+- Edit the file with your actual credentials first
+- Then run it before starting Tomcat
+
+**Linux/Mac:** Export variables in terminal:
+```bash
+export DB_URL="jdbc:postgresql://your-host:5432/postgres"
+export DB_USERNAME="postgres.your_project_id"
+export DB_PASSWORD="your_password"
+```
+
+See `web.xml.local` for reference values (not committed to git)
 
 ### Production Deployment:
 

@@ -25,6 +25,7 @@ public class AuthenticationFilter implements Filter {
         "/auth/login",
         "/auth/google",
         "/auth/logout",
+        "/health",
         "/index.jsp",
         "/css/",
         "/js/",

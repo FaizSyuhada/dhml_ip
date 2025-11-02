@@ -45,35 +45,34 @@ public class LoginServlet extends HttpServlet {
 
         // Convert Student/Staff ID to email if needed
         String emailToSearch = mapIdToEmail(email.trim());
-        logger.info("Login attempt - Input: " + email + ", Searching for: " + emailToSearch);
+        logger.info("Login attempt for user");
         
         // Find user
         User user = userDAO.findByEmail(emailToSearch);
         
+        // Generic error message to prevent user enumeration
+        String genericError = "Invalid email or password";
+        
         if (user == null) {
-            logger.warn("Login attempt for non-existent user: " + email + " (searched: " + emailToSearch + ")");
-            request.setAttribute("error", "Invalid email or password. User not found.");
+            logger.warn("Failed login attempt - user not found");
+            request.setAttribute("error", genericError);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }
-
-        logger.info("User found: " + user.getEmail() + ", Role: " + user.getRole());
-        logger.info("Password hash from DB: " + (user.getPasswordHash() != null ? "Present" : "NULL"));
         
         // Verify password
         if (user.getPasswordHash() == null) {
-            logger.error("User " + user.getEmail() + " has NULL password hash!");
-            request.setAttribute("error", "Invalid email or password. Password not set.");
+            logger.error("User account has no password set");
+            request.setAttribute("error", genericError);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }
         
         boolean passwordMatches = PasswordUtil.verifyPassword(password, user.getPasswordHash());
-        logger.info("Password verification result: " + passwordMatches);
         
         if (!passwordMatches) {
-            logger.warn("Invalid password attempt for user: " + email);
-            request.setAttribute("error", "Invalid email or password. Password mismatch.");
+            logger.warn("Failed login attempt - invalid password");
+            request.setAttribute("error", genericError);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }

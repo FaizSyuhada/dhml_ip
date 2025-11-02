@@ -9,20 +9,20 @@
     <description>DMHLH - Student Mental Health Support Platform</description>
 
     <!-- Database Configuration -->
-    <!-- Priority: Environment variables > web.xml values -->
-    <!-- For production: Set DB_URL, DB_USERNAME, DB_PASSWORD as environment variables -->
-    <!-- For local dev: These fallback values will be used -->
+    <!-- IMPORTANT: Set these as environment variables! -->
+    <!-- Required: DB_URL, DB_USERNAME, DB_PASSWORD -->
+    <!-- DO NOT commit real credentials to version control -->
     <context-param>
         <param-name>db.url</param-name>
-        <param-value>jdbc:postgresql://aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres</param-value>
+        <param-value>CHANGE_ME</param-value>
     </context-param>
     <context-param>
         <param-name>db.username</param-name>
-        <param-value>postgres.dzcwtuudnssrvugjgauf</param-value>
+        <param-value>CHANGE_ME</param-value>
     </context-param>
     <context-param>
         <param-name>db.password</param-name>
-        <param-value>ip_dhml@2026</param-value>
+        <param-value>CHANGE_ME</param-value>
     </context-param>
 
     <!-- Session Configuration -->
