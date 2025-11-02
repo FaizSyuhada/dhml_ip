@@ -11,6 +11,9 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 # Copy WAR file to Tomcat webapps as ROOT.war (so it runs at /)
 COPY --from=build /app/target/dhml.war /usr/local/tomcat/webapps/ROOT.war
 
+# Ensure Tomcat binds to all interfaces
+ENV CATALINA_OPTS="-Djava.net.preferIPv4Stack=true"
+
 EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
